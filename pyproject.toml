@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "better-codex-context"
+version = "1.3.8"
+description = "Shadow context replacement for Codex CLI: long sessions that stay fast, focused and on goal"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+requires-python = ">=3.11"
+authors = [{name = "Mathline Research"}]
+keywords = ["codex", "codex-cli", "context", "llm", "agents", "mcp"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: POSIX",
+    "Topic :: Software Development",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/mathline-io/better-codex-context"
+Issues = "https://github.com/mathline-io/better-codex-context/issues"
+
+[project.scripts]
+bcc = "better_codex_context.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

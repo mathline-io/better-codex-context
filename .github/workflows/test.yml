@@ -1,0 +1,32 @@
+name: test
+on: [push, pull_request]
+jobs:
+  unittest:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      # Every combination reports, so one failure does not hide (cancel) the others.
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ['3.11', '3.14']
+        # macOS and Windows: each Python version once. Token counts are the built-in tokenizer's everywhere.
+        include:
+          - {os: macos-latest, python-version: '3.14'}
+          - {os: macos-latest, python-version: '3.11'}
+          - {os: windows-latest, python-version: '3.14'}
+          - {os: windows-latest, python-version: '3.11'}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      # UTF-8 mode, as every plugin process runs (Windows Python would otherwise use the locale code page).
+      # Failing tests also become annotations, which anyone can read without access to the job log.
+      - shell: bash
+        run: |
+          set -o pipefail
+          PYTHONPATH=src python -X utf8 -m unittest discover -s tests -v 2>&1 | tee test.log || {
+            python -X utf8 scripts/ci_annotate.py test.log
+            exit 1
+          }

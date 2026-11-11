@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "better_context": {
+      "command": "python3",
+      "args": [
+        "${PLUGIN_ROOT}/scripts/launch.py",
+        "serve"
+      ],
+      "env_vars": [
+        "BCC_WORKSPACE",
+        "BCC_LLM_ENDPOINT",
+        "BCC_LLM_MODEL",
+        "BCC_LLM_API_KEY"
+      ]
+    }
+  }
+}

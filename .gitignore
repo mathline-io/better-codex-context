@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+build/
+dist/
+.coverage
+coverage.xml
+
+# Plugin state and anything that may hold real conversations or command output
+.better-codex-context/
+*.sqlite*
+*.jsonl
+
+# Local environment
+.env
+.env.*
+!.env.example
+.DS_Store
+.idea/
+.vscode/

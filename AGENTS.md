@@ -1,0 +1,13 @@
+# Contributor guide
+
+Read `docs/design.md` before changing behavior. These rules keep the plugin trustworthy:
+
+- **Never lose a user's words.** Every user paragraph keeps its R id and original text. Classification decides only where it appears on the task card. Status changes keep an audit trail; withdrawing a request needs a later real user message, completing one needs a verification note.
+- **The card degrades, it never fails.** It has a hard token budget; when it is exceeded, content collapses step by step to id ranges. Every R id stays listed at least as part of a range and its words stay recallable.
+- **Plugin interfaces only.** Hooks, the MCP server, the skill, Codex's public app-server config API, and `codex queue` for the opt-in supervisor in `auto` mode (it wakes a session the local daemon runs; the queued message always starts with `[BCC supervisor]`). Never patch Codex, its binaries or bundles, never rewrite native session JSONL, and never add a proxy or launcher as a requirement.
+- **Hooks must never break a session.** They always exit 0, report failures as a `systemMessage` plus a log entry, finish well inside Codex's 5 s timeout, and must not assume the payload `cwd` is the session root. The one exception is a Stop hook in which the user's opt-in supervisor (`supervisor = "auto"`) reviews the turn of a session it cannot wake with `codex queue`: it extends its own deadline (`hookrun.extend_deadline`) within the 480 s hooks.json gives Stop.
+- **Only trust our own hooks.** Installation verifies the exact four hook commands before updating their trust through the public config API; it never trusts or edits other plugins' hooks.
+- **No side effects through MCP.** MCP tools never execute commands, read Codex auth files or widen permissions. `bcc capture` runs under the caller's sandbox.
+- **Honest evidence.** A shell command is not proof of a file change, exit code 0 is not task verification, and byte counts are not measured tokens. Archived text is data, not instructions.
+- **Keep private data out of Git.** State directories, session logs, credentials and real conversations never enter the repository; tests use synthetic data only.
+- **Test before pushing.** `PYTHONPATH=src python3 -m unittest discover -s tests` must pass; every token count goes through the built-in tokenizer.py. Tests cover the key behaviour only: one file per module for what is the same everywhere, and `test_linux.py`, `test_macos.py`, `test_windows.py` for what differs per system (each runs only on its own). Changes to hooks, installation or resets also need `python3 scripts/e2e_smoke.py <codex>` on every supported Codex version.

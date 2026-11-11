@@ -1,0 +1,10 @@
+Better Codex Context
+Copyright 2026 Mathline Research (https://mathline.io)
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+src/better_codex_context/tokenizer.py ports the counting algorithm of tiktoken
+(https://github.com/openai/tiktoken, MIT License, Copyright (c) 2022 OpenAI,
+Shantanu Jain) to plain Python. assets/o200k_base.ranks.gz is OpenAI's
+o200k_base vocabulary (the merge ranks that algorithm reads), compressed and
+otherwise unchanged.

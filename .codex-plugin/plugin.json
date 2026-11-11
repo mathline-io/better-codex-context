@@ -1,0 +1,36 @@
+{
+  "name": "better-codex-context",
+  "version": "1.3.8",
+  "description": "Shadow context replacement for Codex CLI: long sessions stay fast and on goal. The conversation, a task card and an exact archive are restored after zero-model resets; sidecar compression keeps them compact in the background.",
+  "author": {
+    "name": "Mathline Research",
+    "url": "https://mathline.io"
+  },
+  "homepage": "https://github.com/mathline-io/better-codex-context",
+  "repository": "https://github.com/mathline-io/better-codex-context",
+  "license": "Apache-2.0",
+  "keywords": [
+    "codex",
+    "context",
+    "memory",
+    "task-card",
+    "hooks",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "hooks": "./hooks/hooks.json",
+  "interface": {
+    "displayName": "Better Codex Context",
+    "shortDescription": "Shadow context replacement: fast, focused long sessions",
+    "longDescription": "Keeps a shadow context next to Codex's window: every user request on a budgeted task card (goal, standing rules, tasks, lessons), the files in play, and an exact archive of every output. When the window gets heavy, Codex resets it without a model call and the shadow takes its place. Restores AGENTS.md rules beyond Codex's size limit and stops fix-and-retry loops. Plugin only; Codex itself is not modified.",
+    "developerName": "Mathline Research",
+    "websiteURL": "https://mathline.io",
+    "category": "Productivity",
+    "brandColor": "#51D0FB",
+    "logo": "./assets/logo.png",
+    "composerIcon": "./assets/composer-icon.png",
+    "capabilities": [],
+    "defaultPrompt": "Read the task card, obey its standing constraints and update it once per turn."
+  }
+}

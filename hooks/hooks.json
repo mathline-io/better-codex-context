@@ -1,0 +1,51 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${PLUGIN_ROOT}/scripts/launch.py\" hook",
+            "timeout": 15,
+            "additionalContextLimit": 2000000
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${PLUGIN_ROOT}/scripts/launch.py\" hook",
+            "timeout": 5,
+            "additionalContextLimit": 2000000
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${PLUGIN_ROOT}/scripts/launch.py\" hook",
+            "timeout": 5,
+            "additionalContextLimit": 2000000
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${PLUGIN_ROOT}/scripts/launch.py\" hook",
+            "timeout": 480
+          }
+        ]
+      }
+    ]
+  }
+}
